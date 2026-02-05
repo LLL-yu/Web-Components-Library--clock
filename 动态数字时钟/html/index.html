@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <title> 动态数字时钟</title>
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+   </head>
+<body>
+  <section>
+    <div class="container">
+      <div class="icons">
+        <i class="fas fa-moon"></i>
+        <i class="fas fa-sun"></i>
+      </div>
+      <div class="time">
+        <div class="time-colon">
+          <div class="time-text">
+            <span class="num hour_num">08</span>
+            <span class="text">Hours</span>
+          </div>
+          <span class="colon">:</span>
+        </div>
+        <div class="time-colon">
+          <div class="time-text">
+            <span class="num min_num">45</span>
+            <span class="text">Minutes</span>
+          </div>
+          <span class="colon">:</span>
+        </div>
+        <div class="time-colon">
+          <div class="time-text">
+            <span class="num sec_num">06</span>
+            <span class="text">Seconds</span>
+          </div>
+          <span class="am_pm">AM</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <script>
+  let section = document.querySelector("section"),
+  icons = document.querySelector(".icons");
+  icons.onclick = ()=>{
+    section.classList.toggle("dark");
+  }
+  // 创建一个函数并每秒调用它
+  setInterval(()=>{
+    let date = new Date(),
+    hour = date.getHours(),
+    min = date.getMinutes(),
+    sec = date.getSeconds();
+    let d;
+    d = hour < 12 ? "AM" : "PM"; //如果小时小于 12，则其值为 AM，否则其值为 pm
+    hour = hour > 12 ? hour - 12 : hour; //如果小时值大于 12，则将减去 12（通过这样做，我们将得到 12 之前的值，而不是 13,14 或 24）
+    hour = hour == 0 ? hour = 12 : hour; // 如果小时值为 0，则其值为 12
+    // 如果小于 10，则在所有值前面加 0
+    hour = hour < 10 ? "0" + hour : hour;
+    min = min < 10 ? "0" + min : min;
+    sec = sec < 10 ? "0" + sec : sec;
+    document.querySelector(".hour_num").innerText = hour;
+    document.querySelector(".min_num").innerText = min;
+    document.querySelector(".sec_num").innerText = sec;
+    document.querySelector(".am_pm").innerText = d;
+  }, 1000); // 1000 毫秒 = 1 秒
+  </script>
+</body>
+</html>
